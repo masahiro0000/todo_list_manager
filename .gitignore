@@ -1,0 +1,24 @@
+# パイソンバイトコード
+*.pyc
+*.pyo
+
+# データベースファイル
+*.db
+*.sqlite3
+
+# ログファイル
+*.log
+
+# Django メディアフォルダ
+/media/
+
+# Django 静的ファイル
+/static/
+
+# macOS システムファイル
+.DS_Store
+
+# テスト結果
+/htmlcov/
+.coverage
+.pytest_cache/
