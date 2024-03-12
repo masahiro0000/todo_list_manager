@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+my-todo
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>自分のToDo</h2>
+        <br>
+        {% if user_todos %}
+        {% for todo in user_todos %}
+            <li>
+                {{ todo.title }}&nbsp;&nbsp;：
+                {% if todo.due_date %}
+                    {{ todo.due_date }}
+                {% else %}
+                    期限設定なし
+                {% endif %}
+            </li>
+        {% endfor %}
+        {% else %}
+            <p>現在ToDoはありません</p>
+        {% endif %}
+        <br>
+        <a href="{% url 'create-todo' %}" class="btn btn-primary">新規作成</a>
+    </div>
+{% endblock %}
