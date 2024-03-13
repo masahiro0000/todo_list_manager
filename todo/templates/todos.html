@@ -16,7 +16,7 @@ my-todo
                     &nbsp;&nbsp;
                     {{ todo.title }}&nbsp;&nbsp;：
                     {% if todo.due_date %}
-                        {{ todo.due_date }}
+                        {{ todo.due_date | date:'Y/m/d' }}
                     {% else %}
                         期限設定なし
                     {% endif %}
