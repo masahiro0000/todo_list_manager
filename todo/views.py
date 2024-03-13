@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Todo
 from django.contrib.auth.decorators import login_required
 from .forms import ToDoForm
@@ -26,3 +26,11 @@ def create_todo(request):
     else:
         form = ToDoForm()
     return render(request, "create_todo.html", {"form": form})
+
+@login_required
+def complete(request, todo_id):
+    #ToDoの完了のチェックボックスをつける
+    todo = get_object_or_404(Todo, id=todo_id)
+    todo.completed = not todo.completed #完了、未完了を反転させる
+    todo.save()
+    return redirect('todos')

@@ -9,16 +9,20 @@ my-todo
         <h2>自分のToDo</h2>
         <br>
         {% if user_todos %}
-        {% for todo in user_todos %}
-            <li>
-                {{ todo.title }}&nbsp;&nbsp;：
-                {% if todo.due_date %}
-                    {{ todo.due_date }}
-                {% else %}
-                    期限設定なし
-                {% endif %}
-            </li>
-        {% endfor %}
+            {% for todo in user_todos %}
+                <form method="POST" action="{% url 'complete' todo.id %}">
+                    {% csrf_token %}
+                    <input type="checkbox" name="todo_completed_{{ todo.id }}" id="todo_completed_{{ todo.id }}" {% if todo.completed %}checked{% endif %} onchange="this.form.submit();">
+                    &nbsp;&nbsp;
+                    {{ todo.title }}&nbsp;&nbsp;：
+                    {% if todo.due_date %}
+                        {{ todo.due_date }}
+                    {% else %}
+                        期限設定なし
+                    {% endif %}
+                    <br>
+                </form>
+            {% endfor %}
         {% else %}
             <p>現在ToDoはありません</p>
         {% endif %}
