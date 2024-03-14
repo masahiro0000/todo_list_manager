@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Todo
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import ToDoForm
+from .models import Todo
 
 def index(request):
     return render(request, "index.html")
@@ -44,6 +45,14 @@ def edit(request, todo_id):
     return render(request, "edit.html", context)
 
 @login_required
+@require_POST
+def delete(request, todo_id):
+    todo = get_object_or_404(Todo, id=todo_id)
+    todo.delete()
+    return redirect('todos')
+
+@login_required
+@require_POST
 def complete(request, todo_id):
     #ToDoの完了のチェックボックスをつける
     todo = get_object_or_404(Todo, id=todo_id)
