@@ -14,9 +14,9 @@ my-todo
                     {% csrf_token %}
                     <input type="checkbox" name="todo_completed_{{ todo.id }}" id="todo_completed_{{ todo.id }}" {% if todo.completed %}checked{% endif %} onchange="this.form.submit();">
                     &nbsp;&nbsp;
-                    {{ todo.title }}&nbsp;&nbsp;：
+                    <a href="{% url 'edit' todo.id %}">{{ todo.title }}</a>&nbsp;&nbsp;：
                     {% if todo.due_date %}
-                        {{ todo.due_date | date:'Y/m/d' }}
+                        {{ todo.due_date | date:'Y年m月d日' }}
                     {% else %}
                         期限設定なし
                     {% endif %}

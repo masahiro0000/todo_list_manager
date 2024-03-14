@@ -28,6 +28,22 @@ def create_todo(request):
     return render(request, "create_todo.html", {"form": form})
 
 @login_required
+def edit(request, todo_id):
+    todo = get_object_or_404(Todo, id=todo_id)
+    if request.method == "POST":
+        form = ToDoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todos')
+    else:
+        form = ToDoForm(instance=todo)
+    context = {
+        "form": form,
+        "todo": todo,
+    }
+    return render(request, "edit.html", context)
+
+@login_required
 def complete(request, todo_id):
     #ToDoの完了のチェックボックスをつける
     todo = get_object_or_404(Todo, id=todo_id)
