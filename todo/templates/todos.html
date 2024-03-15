@@ -7,25 +7,45 @@ my-todo
 {% block content %}
     <div class="container">
         <h2>自分のToDo</h2>
+        <hr>
+
+        <h3>未完了タスク</h3>
+        {% for incomplete_todo in incomplete_todos %}
+            <form method="POST" action="{% url 'complete' incomplete_todo.id %}">
+                {% csrf_token %}
+                <input type="checkbox" name="todo_completed_{{ incomplete_todo.id }}" id="todo_completed_{{ incomplete_todo.id }}" {% if incomplete_todo.completed %}checked{% endif %} onchange="this.form.submit();">
+                &nbsp;&nbsp;
+                <a href="{% url 'edit' incomplete_todo.id %}">{{ incomplete_todo.title }}</a>&nbsp;&nbsp;：
+                {% if incomplete_todo.due_date %}
+                    {{ incomplete_todo.due_date | date:'Y年m月d日' }}
+                {% else %}
+                    期限設定なし
+                {% endif %}
+                <br>
+            </form>
+        {% endfor %}
         <br>
-        {% if user_todos %}
-            {% for todo in user_todos %}
-                <form method="POST" action="{% url 'complete' todo.id %}">
-                    {% csrf_token %}
-                    <input type="checkbox" name="todo_completed_{{ todo.id }}" id="todo_completed_{{ todo.id }}" {% if todo.completed %}checked{% endif %} onchange="this.form.submit();">
-                    &nbsp;&nbsp;
-                    <a href="{% url 'edit' todo.id %}">{{ todo.title }}</a>&nbsp;&nbsp;：
-                    {% if todo.due_date %}
-                        {{ todo.due_date | date:'Y年m月d日' }}
-                    {% else %}
-                        期限設定なし
-                    {% endif %}
-                    <br>
-                </form>
-            {% endfor %}
-        {% else %}
+
+        <h3>完了タスク</h3>
+        {% for completed_todo in completed_todos %}
+            <form method="POST" action="{% url 'complete' completed_todo.id %}">
+                {% csrf_token %}
+                <input type="checkbox" name="todo_completed_{{ completed_todo.id }}" id="todo_completed_{{ completed_todo.id }}" {% if completed_todo.completed %}checked{% endif %} onchange="this.form.submit();">
+                &nbsp;&nbsp;
+                <a href="{% url 'edit' completed_todo.id %}">{{ completed_todo.title }}</a>&nbsp;&nbsp;：
+                {% if completed_todo.due_date %}
+                    {{ completed_todo.due_date | date:'Y年m月d日' }}
+                {% else %}
+                    期限設定なし
+                {% endif %}
+                <br>
+            </form>
+        {% endfor %}
+
+        {% if not incomplete_todos and not completed_todos %}
             <p>現在ToDoはありません</p>
         {% endif %}
+
         <br>
         <a href="{% url 'create-todo' %}" class="btn btn-primary">新規作成</a>
     </div>

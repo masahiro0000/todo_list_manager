@@ -10,9 +10,13 @@ def index(request):
 @login_required
 def todos(request):
     #作成日順にユーザーのタスクを取得
-    user_todos = Todo.objects.filter(user = request.user).order_by("created_at")
+    completed_todos = Todo.objects.filter(user = request.user, completed=True).order_by("created_at")
+    incomplete_todos = Todo.objects.filter(user = request.user, completed=False).order_by("created_at")
 
-    context = {"user_todos" : user_todos}
+    context = {
+        "completed_todos": completed_todos,
+        "incomplete_todos": incomplete_todos
+        }
     return render(request, "todos.html", context)
 
 @login_required
