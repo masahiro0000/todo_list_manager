@@ -22,3 +22,9 @@
 /htmlcov/
 .coverage
 .pytest_cache/
+
+# デバッグ設定
+launch.json
+
+# 環境変数ファイル
+.env
