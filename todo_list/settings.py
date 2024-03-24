@@ -17,8 +17,8 @@ import os, dj_database_url, environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#env = environ.Env()
 
+# 環境変数から値を取得
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False')
@@ -122,7 +122,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH')
+#LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH')
 
 LOGGING = {
     'version': 1,
@@ -144,4 +144,8 @@ LOGGING = {
     }
 }
 
+# カスタムユーザーモデル
+AUTH_USER_MODEL = 'accounts.Profile'
+
+# ログアウト時のリダイレクト先
 LOGOUT_REDIRECT_URL = 'login'
