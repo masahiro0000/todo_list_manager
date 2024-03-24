@@ -17,7 +17,8 @@ import os, dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+#ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['todo-list-7cof.onrender.com', '127.0.0.1']
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
