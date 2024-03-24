@@ -17,14 +17,14 @@ import os, dj_database_url, environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env()
+#env = environ.Env()
 
-#ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+#ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
 
-DEBUG = env('DEBUG')
+DEBUG = os.environ.get('DEBUG', 'False')
 
 # Application definition
 
@@ -123,7 +123,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOG_FILE_PATH = env('LOG_FILE_PATH')
+LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH')
 
 LOGGING = {
     'version': 1,
