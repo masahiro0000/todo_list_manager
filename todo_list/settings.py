@@ -11,18 +11,20 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os, dj_database_url
+import os, dj_database_url, environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+
 #ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-ALLOWED_HOSTS = ['todo-list-7cof.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = os.environ.get('DEBUG')
+DEBUG = env('DEBUG')
 
 # Application definition
 
@@ -121,7 +123,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH')
+LOG_FILE_PATH = env('LOG_FILE_PATH')
 
 LOGGING = {
     'version': 1,
