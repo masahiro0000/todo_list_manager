@@ -20,11 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #env = environ.Env()
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-#ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
-
 SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
-
 DEBUG = os.environ.get('DEBUG', 'False')
+SUPERUSERNAME = os.environ.get('SUPERUSERNAME')
+SUPERUSERPASSWORD = os.environ.get('SUPERUSERPASSWORD')
 
 # Application definition
 
