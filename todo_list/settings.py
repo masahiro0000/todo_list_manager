@@ -128,8 +128,9 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': LOG_FILE_PATH,
+            'class': 'logging.StreamHandler',
+            #'class': 'logging.FileHandler',
+            #'filename': LOG_FILE_PATH,
         },
     },
     'loggers': {
