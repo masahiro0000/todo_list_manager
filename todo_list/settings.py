@@ -10,21 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from decouple import Config, RepositoryEnv
 from pathlib import Path
 import os, dj_database_url
 
-# 通常の.envファイルを読み込む
-config = Config(RepositoryEnv('.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = os.environ.get('DEBUG')
 
 # Application definition
 
@@ -123,7 +120,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOG_FILE_PATH = config('LOG_FILE_PATH', default='./logs/django_debug.log')
+LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH')
 
 LOGGING = {
     'version': 1,
