@@ -144,8 +144,6 @@ LOGGING = {
     }
 }
 
-# カスタムユーザーモデル
-AUTH_USER_MODEL = 'accounts.Profile'
 
 # ログアウト時のリダイレクト先
 LOGOUT_REDIRECT_URL = 'login'
