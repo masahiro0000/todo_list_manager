@@ -28,3 +28,6 @@ launch.json
 
 # 環境変数ファイル
 .env
+
+# Google APIのシークレットキー
+credentials.json
